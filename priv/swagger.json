@@ -16,17 +16,17 @@
   "host" : "petstore.swagger.io",
   "basePath" : "/v2",
   "tags" : [ {
-    "name" : "pets",
+    "name" : "pet",
     "description" : "Everything about your Pets",
     "externalDocs" : {
       "description" : "Find out more",
       "url" : "http://swagger.io"
     }
   }, {
-    "name" : "stores",
+    "name" : "store",
     "description" : "Access to Petstore orders"
   }, {
-    "name" : "users",
+    "name" : "user",
     "description" : "Operations about user",
     "externalDocs" : {
       "description" : "Find out more about our store",
@@ -35,9 +35,9 @@
   } ],
   "schemes" : [ "http" ],
   "paths" : {
-    "/pets" : {
+    "/pet" : {
       "post" : {
-        "tags" : [ "pets" ],
+        "tags" : [ "pet" ],
         "summary" : "Add a new pet to the store",
         "description" : "",
         "operationId" : "addPet",
@@ -62,7 +62,7 @@
         } ]
       },
       "put" : {
-        "tags" : [ "pets" ],
+        "tags" : [ "pet" ],
         "summary" : "Update an existing pet",
         "description" : "",
         "operationId" : "updatePet",
@@ -95,7 +95,7 @@
     },
     "/pet/findByStatus" : {
       "get" : {
-        "tags" : [ "pets" ],
+        "tags" : [ "pet" ],
         "summary" : "Finds Pets by status",
         "description" : "Multiple status values can be provided with comma separated strings",
         "operationId" : "findPetsByStatus",
@@ -132,9 +132,9 @@
         } ]
       }
     },
-    "/pets/findByTags" : {
+    "/pet/findByTags" : {
       "get" : {
-        "tags" : [ "pets" ],
+        "tags" : [ "pet" ],
         "summary" : "Finds Pets by tags",
         "description" : "Muliple tags can be provided with comma separated strings. Use         tag1, tag2, tag3 for testing.",
         "operationId" : "findPetsByTags",
@@ -170,9 +170,9 @@
         "deprecated" : true
       }
     },
-    "/pets/{petId}" : {
+    "/pet/{petId}" : {
       "get" : {
-        "tags" : [ "pets" ],
+        "tags" : [ "pet" ],
         "summary" : "Find pet by ID",
         "description" : "Returns a single pet",
         "operationId" : "getPetById",
@@ -204,7 +204,7 @@
         } ]
       },
       "post" : {
-        "tags" : [ "pets" ],
+        "tags" : [ "pet" ],
         "summary" : "Updates a pet in the store with form data",
         "description" : "",
         "operationId" : "updatePetWithForm",
@@ -240,7 +240,7 @@
         } ]
       },
       "delete" : {
-        "tags" : [ "pets" ],
+        "tags" : [ "pet" ],
         "summary" : "Deletes a pet",
         "description" : "",
         "operationId" : "deletePet",
@@ -271,9 +271,9 @@
         } ]
       }
     },
-    "/pets/{petId}/uploadImage" : {
+    "/pet/{petId}/uploadImage" : {
       "post" : {
-        "tags" : [ "pets" ],
+        "tags" : [ "pet" ],
         "summary" : "uploads an image",
         "description" : "",
         "operationId" : "uploadFile",
@@ -312,9 +312,9 @@
         } ]
       }
     },
-    "/stores/inventory" : {
+    "/store/inventory" : {
       "get" : {
-        "tags" : [ "stores" ],
+        "tags" : [ "store" ],
         "summary" : "Returns pet inventories by status",
         "description" : "Returns a map of status codes to quantities",
         "operationId" : "getInventory",
@@ -337,9 +337,9 @@
         } ]
       }
     },
-    "/stores/orders" : {
+    "/store/order" : {
       "post" : {
-        "tags" : [ "stores" ],
+        "tags" : [ "store" ],
         "summary" : "Place an order for a pet",
         "description" : "",
         "operationId" : "placeOrder",
@@ -366,9 +366,9 @@
         }
       }
     },
-    "/stores/orders/{orderId}" : {
+    "/store/order/{orderId}" : {
       "get" : {
-        "tags" : [ "stores" ],
+        "tags" : [ "store" ],
         "summary" : "Find purchase order by ID",
         "description" : "For valid response try integer IDs with value >= 1 and <= 10.         Other values will generated exceptions",
         "operationId" : "getOrderById",
@@ -399,7 +399,7 @@
         }
       },
       "delete" : {
-        "tags" : [ "stores" ],
+        "tags" : [ "store" ],
         "summary" : "Delete purchase order by ID",
         "description" : "For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors",
         "operationId" : "deleteOrder",
@@ -423,9 +423,9 @@
         }
       }
     },
-    "/users" : {
+    "/user" : {
       "post" : {
-        "tags" : [ "users" ],
+        "tags" : [ "user" ],
         "summary" : "Create user",
         "description" : "This can only be done by the logged in user.",
         "operationId" : "createUser",
@@ -446,9 +446,9 @@
         }
       }
     },
-    "/users/createWithArray" : {
+    "/user/createWithArray" : {
       "post" : {
-        "tags" : [ "users" ],
+        "tags" : [ "user" ],
         "summary" : "Creates list of users with given input array",
         "description" : "",
         "operationId" : "createUsersWithArrayInput",
@@ -472,9 +472,9 @@
         }
       }
     },
-    "/users/createWithList" : {
+    "/user/createWithList" : {
       "post" : {
-        "tags" : [ "users" ],
+        "tags" : [ "user" ],
         "summary" : "Creates list of users with given input array",
         "description" : "",
         "operationId" : "createUsersWithListInput",
@@ -498,9 +498,9 @@
         }
       }
     },
-    "/users/login" : {
+    "/user/login" : {
       "get" : {
-        "tags" : [ "users" ],
+        "tags" : [ "user" ],
         "summary" : "Logs user into the system",
         "description" : "",
         "operationId" : "loginUser",
@@ -543,9 +543,9 @@
         }
       }
     },
-    "/users/logout" : {
+    "/user/logout" : {
       "get" : {
-        "tags" : [ "users" ],
+        "tags" : [ "user" ],
         "summary" : "Logs out current logged in user session",
         "description" : "",
         "operationId" : "logoutUser",
@@ -558,9 +558,9 @@
         }
       }
     },
-    "/users/{username}" : {
+    "/user/{username}" : {
       "get" : {
-        "tags" : [ "users" ],
+        "tags" : [ "user" ],
         "summary" : "Get user by user name",
         "description" : "",
         "operationId" : "getUserByName",
@@ -588,7 +588,7 @@
         }
       },
       "put" : {
-        "tags" : [ "users" ],
+        "tags" : [ "user" ],
         "summary" : "Updated user",
         "description" : "This can only be done by the logged in user.",
         "operationId" : "updateUser",
@@ -618,7 +618,7 @@
         }
       },
       "delete" : {
-        "tags" : [ "users" ],
+        "tags" : [ "user" ],
         "summary" : "Delete user",
         "description" : "This can only be done by the logged in user.",
         "operationId" : "deleteUser",

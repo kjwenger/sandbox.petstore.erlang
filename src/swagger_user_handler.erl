@@ -1,5 +1,5 @@
 %% basic handler
--module(swagger_users_handler).
+-module(swagger_user_handler).
 
 %% Cowboy REST callbacks
 -export([allowed_methods/2]).

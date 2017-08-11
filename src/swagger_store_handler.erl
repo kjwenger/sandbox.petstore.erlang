@@ -1,5 +1,5 @@
 %% basic handler
--module(swagger_pets_handler).
+-module(swagger_store_handler).
 
 %% Cowboy REST callbacks
 -export([allowed_methods/2]).
@@ -56,15 +56,7 @@ rest_init(Req0, {Operations, LogicHandler, ValidatorState}) ->
 allowed_methods(
     Req,
     State = #state{
-        operation_id = 'AddPet'
-    }
-) ->
-    {[<<"POST">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'DeletePet'
+        operation_id = 'DeleteOrder'
     }
 ) ->
     {[<<"DELETE">>], Req, State};
@@ -72,7 +64,7 @@ allowed_methods(
 allowed_methods(
     Req,
     State = #state{
-        operation_id = 'FindPetsByStatus'
+        operation_id = 'GetInventory'
     }
 ) ->
     {[<<"GET">>], Req, State};
@@ -80,7 +72,7 @@ allowed_methods(
 allowed_methods(
     Req,
     State = #state{
-        operation_id = 'FindPetsByTags'
+        operation_id = 'GetOrderById'
     }
 ) ->
     {[<<"GET">>], Req, State};
@@ -88,31 +80,7 @@ allowed_methods(
 allowed_methods(
     Req,
     State = #state{
-        operation_id = 'GetPetById'
-    }
-) ->
-    {[<<"GET">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'UpdatePet'
-    }
-) ->
-    {[<<"PUT">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'UpdatePetWithForm'
-    }
-) ->
-    {[<<"POST">>], Req, State};
-
-allowed_methods(
-    Req,
-    State = #state{
-        operation_id = 'UploadFile'
+        operation_id = 'PlaceOrder'
     }
 ) ->
     {[<<"POST">>], Req, State};
@@ -127,84 +95,37 @@ allowed_methods(Req, State) ->
         State :: state()
     }.
 
-%%is_authorized(
-%%    Req0,
-%%    State = #state{
-%%        operation_id = 'AddPet' = OperationID,
-%%        logic_handler = LogicHandler
-%%    }
-%%) -> true .
-%%
-%%is_authorized(
-%%    Req0,
-%%    State = #state{
-%%        operation_id = 'DeletePet' = OperationID,
-%%        logic_handler = LogicHandler
-%%    }
-%%) -> true .
-%%
-%%is_authorized(
-%%    Req0,
-%%    State = #state{
-%%        operation_id = 'FindPetsByStatus' = OperationID,
-%%        logic_handler = LogicHandler
-%%    }
-%%) -> true .
-%%
-%%is_authorized(
-%%    Req0,
-%%    State = #state{
-%%        operation_id = 'FindPetsByTags' = OperationID,
-%%        logic_handler = LogicHandler
-%%    }
-%%) -> true .
-%%
-%%is_authorized(
-%%    Req0,
-%%    State = #state{
-%%        operation_id = 'GetPetById' = OperationID,
-%%        logic_handler = LogicHandler
-%%    }
-%%) ->
-%%    From = header,
-%%    Result = swagger_auth:authorize_api_key(
-%%        LogicHandler,
-%%        OperationID,
-%%        From,
-%%        "api_key",
-%%        Req0
-%%    ),
-%%    case Result of
-%%        {true, Context, Req} ->  {true, Req, State#state{context = Context}};
-%%        {false, AuthHeader, Req} ->  {{false, AuthHeader}, Req, State}
-%%    end;
-%%
-%%is_authorized(
-%%    Req0,
-%%    State = #state{
-%%        operation_id = 'UpdatePet' = OperationID,
-%%        logic_handler = LogicHandler
-%%    }
-%%) -> true .
-%%
-%%is_authorized(
-%%    Req0,
-%%    State = #state{
-%%        operation_id = 'UpdatePetWithForm' = OperationID,
-%%        logic_handler = LogicHandler
-%%    }
-%%) -> true .
-%%
-%%is_authorized(
-%%    Req0,
-%%    State = #state{
-%%        operation_id = 'UploadFile' = OperationID,
-%%        logic_handler = LogicHandler
-%%    }
-%%) -> true .
+is_authorized(Req, State) ->
+    {true, Req, State};
+
+is_authorized(
+    Req0,
+    State = #state{
+        operation_id = 'GetInventory' = OperationID,
+        logic_handler = LogicHandler
+    }
+) ->
+    From = header,
+    Result = swagger_auth:authorize_api_key(
+        LogicHandler,
+        OperationID,
+        From,
+        "api_key",
+        Req0
+    ),
+    case Result of
+        {true, Context, Req} ->  {true, Req, State#state{context = Context}};
+        {false, AuthHeader, Req} ->  {{false, AuthHeader}, Req, State}
+    end;
 
 is_authorized(Req, State) ->
-    {{true, <<"">>}, Req, State}.
+    {true, Req, State};
+
+is_authorized(Req, State) ->
+    {true, Req, State};
+
+is_authorized(Req, State) ->
+    {{false, <<"">>}, Req, State}.
 
 -spec content_types_accepted(Req :: cowboy_req:req(), State :: state()) ->
     {
@@ -224,7 +145,7 @@ content_types_accepted(Req, State) ->
 valid_content_headers(
     Req0,
     State = #state{
-        operation_id = 'AddPet'
+        operation_id = 'DeleteOrder'
     }
 ) ->
     Headers = [],
@@ -234,17 +155,7 @@ valid_content_headers(
 valid_content_headers(
     Req0,
     State = #state{
-        operation_id = 'DeletePet'
-    }
-) ->
-    Headers = ["api_key"],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'FindPetsByStatus'
+        operation_id = 'GetInventory'
     }
 ) ->
     Headers = [],
@@ -254,7 +165,7 @@ valid_content_headers(
 valid_content_headers(
     Req0,
     State = #state{
-        operation_id = 'FindPetsByTags'
+        operation_id = 'GetOrderById'
     }
 ) ->
     Headers = [],
@@ -264,37 +175,7 @@ valid_content_headers(
 valid_content_headers(
     Req0,
     State = #state{
-        operation_id = 'GetPetById'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'UpdatePet'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'UpdatePetWithForm'
-    }
-) ->
-    Headers = [],
-    {Result, Req} = validate_headers(Headers, Req0),
-    {Result, Req, State};
-
-valid_content_headers(
-    Req0,
-    State = #state{
-        operation_id = 'UploadFile'
+        operation_id = 'PlaceOrder'
     }
 ) ->
     Headers = [],
