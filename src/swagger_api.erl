@@ -223,7 +223,7 @@ request_param_info('UpdatePetWithForm', 'petId') ->
 
 request_param_info('UpdatePetWithForm', 'name') ->
     #{
-        source =>   ,
+        source =>  binding ,
         rules => [
             {type, 'binary'},
             not_required
@@ -232,7 +232,7 @@ request_param_info('UpdatePetWithForm', 'name') ->
 
 request_param_info('UpdatePetWithForm', 'status') ->
     #{
-        source =>   ,
+        source =>  binding ,
         rules => [
             {type, 'binary'},
             not_required
@@ -250,7 +250,7 @@ request_param_info('UploadFile', 'petId') ->
 
 request_param_info('UploadFile', 'additionalMetadata') ->
     #{
-        source =>   ,
+        source =>  binding ,
         rules => [
             {type, 'binary'},
             not_required
@@ -259,7 +259,7 @@ request_param_info('UploadFile', 'additionalMetadata') ->
 
 request_param_info('UploadFile', 'file') ->
     #{
-        source =>   ,
+        source =>  binding ,
         rules => [
             not_required
         ]

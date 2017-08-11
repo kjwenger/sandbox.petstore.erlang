@@ -127,84 +127,84 @@ allowed_methods(Req, State) ->
         State :: state()
     }.
 
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'AddPet' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'DeletePet' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'FindPetsByStatus' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'FindPetsByTags' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'GetPetById' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-    From = header,
-    Result = swagger_auth:authorize_api_key(
-        LogicHandler,
-        OperationID,
-        From,
-        "api_key",
-        Req0
-    ),
-    case Result of
-        {true, Context, Req} ->  {true, Req, State#state{context = Context}};
-        {false, AuthHeader, Req} ->  {{false, AuthHeader}, Req, State}
-    end;
-
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'UpdatePet' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'UpdatePetWithForm' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
-
-is_authorized(
-    Req0,
-    State = #state{
-        operation_id = 'UploadFile' = OperationID,
-        logic_handler = LogicHandler
-    }
-) ->
+%%is_authorized(
+%%    Req0,
+%%    State = #state{
+%%        operation_id = 'AddPet' = OperationID,
+%%        logic_handler = LogicHandler
+%%    }
+%%) -> true .
+%%
+%%is_authorized(
+%%    Req0,
+%%    State = #state{
+%%        operation_id = 'DeletePet' = OperationID,
+%%        logic_handler = LogicHandler
+%%    }
+%%) -> true .
+%%
+%%is_authorized(
+%%    Req0,
+%%    State = #state{
+%%        operation_id = 'FindPetsByStatus' = OperationID,
+%%        logic_handler = LogicHandler
+%%    }
+%%) -> true .
+%%
+%%is_authorized(
+%%    Req0,
+%%    State = #state{
+%%        operation_id = 'FindPetsByTags' = OperationID,
+%%        logic_handler = LogicHandler
+%%    }
+%%) -> true .
+%%
+%%is_authorized(
+%%    Req0,
+%%    State = #state{
+%%        operation_id = 'GetPetById' = OperationID,
+%%        logic_handler = LogicHandler
+%%    }
+%%) ->
+%%    From = header,
+%%    Result = swagger_auth:authorize_api_key(
+%%        LogicHandler,
+%%        OperationID,
+%%        From,
+%%        "api_key",
+%%        Req0
+%%    ),
+%%    case Result of
+%%        {true, Context, Req} ->  {true, Req, State#state{context = Context}};
+%%        {false, AuthHeader, Req} ->  {{false, AuthHeader}, Req, State}
+%%    end;
+%%
+%%is_authorized(
+%%    Req0,
+%%    State = #state{
+%%        operation_id = 'UpdatePet' = OperationID,
+%%        logic_handler = LogicHandler
+%%    }
+%%) -> true .
+%%
+%%is_authorized(
+%%    Req0,
+%%    State = #state{
+%%        operation_id = 'UpdatePetWithForm' = OperationID,
+%%        logic_handler = LogicHandler
+%%    }
+%%) -> true .
+%%
+%%is_authorized(
+%%    Req0,
+%%    State = #state{
+%%        operation_id = 'UploadFile' = OperationID,
+%%        logic_handler = LogicHandler
+%%    }
+%%) -> true .
 
 is_authorized(Req, State) ->
-    {{false, <<"">>}, Req, State}.
+    {{true, <<"">>}, Req, State}.
 
 -spec content_types_accepted(Req :: cowboy_req:req(), State :: state()) ->
     {
